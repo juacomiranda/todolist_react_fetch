@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 export function List () {
     const [tarea, setTarea] = useState('');
     const [tareas, setTareas] = useState([]);
+    const API_URL = "https://playground.4geeks.com/todo/users/juacomiranda";
 
     const agregarTarea = () => {
         if (tarea.trim() === '') return;
