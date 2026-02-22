@@ -5,6 +5,13 @@ export function List () {
     const [tareas, setTareas] = useState([]);
     const API_URL = "https://playground.4geeks.com/todo/users/juacomiranda";
 
+    useEffect(() => {
+        fetch('https://playground.4geeks.com/todo/users/juacomiranda')
+        .then(response => response.json())
+        .then(data => setTareas(data.todos))
+    },[]);
+
+
     const agregarTarea = () => {
         if (tarea.trim() === '') return;
 
@@ -39,7 +46,7 @@ export function List () {
                     <ul className="my-3 text-start">
                         {tareas.map((t, index) =>(
                             <li 
-                                key={index}>{t}
+                                key={index}>{t.label}
                                 <i className="fa-solid fa-trash-can" onClick={() => borrarTarea(index)} ></i>
                             </li>
                         ))}
