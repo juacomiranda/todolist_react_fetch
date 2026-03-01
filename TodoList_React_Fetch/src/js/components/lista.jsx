@@ -15,9 +15,26 @@ export function List () {
     const agregarTarea = () => {
         if (tarea.trim() === '') return;
 
-        setTareas ([...tareas, tarea]);
-        setTarea ('');
-    }
+
+        fetch ('https://playground.4geeks.com/todo/todos/juacomiranda', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'  },
+            body: JSON.stringify({
+                label: tarea,
+                done: false
+            })
+        })
+            .then(response => response.json())
+            .then (nuevaTarea => {
+                setTareas([...tareas, nuevaTarea]);
+                setTarea('');
+            })
+            .catch (error => console.error(error));
+        };
+
+        
+    
 
     const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
@@ -27,8 +44,9 @@ export function List () {
 
     const borrarTarea = (indexBorrar) => {
         setTareas(tareas.filter((_, index) => index !== indexBorrar));
+    
     }
-  
+
 
     return (
         <div className="text-center">
