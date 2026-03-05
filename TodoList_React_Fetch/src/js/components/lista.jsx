@@ -42,10 +42,16 @@ export function List () {
     }
     };
 
-    const borrarTarea = (indexBorrar) => {
-        setTareas(tareas.filter((_, index) => index !== indexBorrar));
-    
-    }
+    const borrarTarea = (id) => {
+
+    fetch(`https://playground.4geeks.com/todo/todos/${id}`, {
+        method: "DELETE"
+    })
+        .then(() => {
+            setTareas(tareas.filter(t => t.id !== id))
+         });
+
+};
 
 
     return (
@@ -62,10 +68,10 @@ export function List () {
                />
                 <div className="container border mt-5 ">
                     <ul className="my-3 text-start">
-                        {tareas.map((t, index) =>(
+                        {tareas.map((t, ) =>(
                             <li 
-                                key={index}>{t.label}
-                                <i className="fa-solid fa-trash-can" onClick={() => borrarTarea(index)} ></i>
+                                key={t.id}>{t.label}
+                                <i className="fa-solid fa-trash-can" onClick={() => borrarTarea(t.id)} ></i>
                             </li>
                         ))}
                     </ul>
